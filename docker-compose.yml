@@ -9,7 +9,7 @@ services:
       - 1025:25/tcp
       - 1143:143/tcp
     volumes:
-      - protonmail:/home/protonmail
+      - protonmail_data_directory:/home/protonmail
     restart: unless-stopped
     stdin_open: true 
     tty: true
