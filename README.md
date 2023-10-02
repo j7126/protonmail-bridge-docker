@@ -1,3 +1,26 @@
+# This fork
+This repo ([j7126/protonmail-bridge-docker](https://github.com/j7126/protonmail-bridge-docker)) is a fork of [shenxn/protonmail-bridge-docker](https://github.com/shenxn/protonmail-bridge-docker)
+
+This fork allows running as a non-root user for added security.
+
+## Setup with docker compose:
+
+You can replace the user and group ids in the init command and the `docker-compose.yml` with those matching the user you want to run the container as. Ensure the data volume directory is owned by that user.
+
+### Initialization
+
+To initialize and add account to the bridge, run the following command.
+
+```
+docker run --user 8535:8535 --rm -it -v protonmail_data_directory:/home/protonmail $(docker build -q ./deb) init
+```
+
+Wait for the bridge to startup, use `login` command and follow the instructions to add your account into the bridge. Then use `info` to see the configuration information (username and password). After that, use `exit` to exit the bridge. You may need `CTRL+C` to exit the docker entirely.
+
+### Run
+
+To run the container, edit the docker compose file with your data directory and user/group id and run `docker compose up -d`
+
 # ProtonMail IMAP/SMTP Bridge Docker Container
 
 ![version badge](https://img.shields.io/docker/v/shenxn/protonmail-bridge)
