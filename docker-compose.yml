@@ -1,18 +1,15 @@
-version: '2.1'
+version: '3'
 
 services:
   protonmail-bridge:
-    image: shenxn/protonmail-bridge
-    # build:
-    #  context: ./build
-    #  dockerfile: Dockerfile
-    container_name: pm_bridge
+    container_name: protonmail-bridge
+    build: ./deb
+    user: "8535:8535"
     ports:
       - 1025:25/tcp
       - 1143:143/tcp
+    volumes:
+      - protonmail:/home/protonmail
     restart: unless-stopped
     stdin_open: true 
     tty: true
-volumes:
-  protonmail:
-    name: protonmail
